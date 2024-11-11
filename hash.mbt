@@ -27,7 +27,7 @@ typealias IOError = @io.IOError
 /// decode data written with any previously released version,
 /// subject to issues such as security fixes.
 /// See the Go compatibility document for background: https://golang.org/doc/go1compat
-pub trait Hash {
+pub(open) trait Hash {
   /// Write (via the embedded io.Writer interface) adds more data to the running hash.
   /// It never returns an error.
   /// @io.Writer
@@ -51,7 +51,7 @@ pub trait Hash {
 }
 
 /// Hash32 is the common interface implemented by all 32-bit hash functions.
-pub trait Hash32 {
+pub(open) trait Hash32 {
   sum32(Self) -> UInt
   // Hash
   write(Self, Slice[Byte]) -> (Int, IOError?)
@@ -62,7 +62,7 @@ pub trait Hash32 {
 }
 
 /// Hash64 is the common interface implemented by all 64-bit hash functions.
-pub trait Hash64 {
+pub(open) trait Hash64 {
   sum64() -> UInt64
   // Hash
   write(Self, Slice[Byte]) -> (Int, IOError?)
