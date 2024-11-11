@@ -1,7 +1,7 @@
-# gmlewis/zlib
-[![check](https://github.com/gmlewis/moonbit-zlib/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-zlib/actions/workflows/check.yml)
+# gmlewis/hash
+[![check](https://github.com/gmlewis/moonbit-hash/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-hash/actions/workflows/check.yml)
 
-This is a hash functions package based on Go's implementation:
+This package provides hash functions based on Go's implementation:
 https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/hash.go;l=26
 which has the copyright notice:
 
