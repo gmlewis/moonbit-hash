@@ -49,6 +49,9 @@ pub fn new() -> Digest {
   { d: 1 }
 }
 
+// Digest implements the @hash.Hash32 trait.
+let _interface : @hash.Hash32 = new()
+
 pub fn size(self : Digest) -> Int {
   return SIZE
 }
