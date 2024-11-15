@@ -60,9 +60,9 @@ pub fn block_size(self : Digest) -> Int {
   return 4
 }
 
-const MAGIC = b"adl\x01"
+let magic = b"adl\x01"
 
-const MARSHALED_SIZE = 8 // MAGIC.length() + 4
+const MARSHALED_SIZE = 8 // magic.length() + 4
 
 pub fn marshal_binary(self : Digest) -> (Slice[Byte], IOError?) {
   let b = [
@@ -86,17 +86,17 @@ fn be_uint32(b : Slice[Byte]) -> UInt {
 }
 
 fn has_magic(b : Slice[Byte]) -> Bool {
-  b[0] == MAGIC[0] && b[1] == MAGIC[1] && b[2] == MAGIC[2] && b[3] == MAGIC[3]
+  b[0] == magic[0] && b[1] == magic[1] && b[2] == magic[2] && b[3] == magic[3]
 }
 
 pub fn unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
-  if b.length() < MAGIC.length() || not(has_magic(b)) {
+  if b.length() < magic.length() || not(has_magic(b)) {
     return Some(IOError("hash/adler32: invalid hash state identifier"))
   }
   if b.length() != MARSHALED_SIZE {
     return Some(IOError("hash/adler32: invalid hash state size"))
   }
-  self.d = be_uint32(b[MAGIC.length():])
+  self.d = be_uint32(b[magic.length():])
   None
 }
 

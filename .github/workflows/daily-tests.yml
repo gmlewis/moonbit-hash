@@ -57,6 +57,7 @@ jobs:
 
       - name: moon test
         run: |
+          moon test --target native
           moon test --target all
 
       - name: format diff
