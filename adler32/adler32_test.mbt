@@ -1,18 +1,20 @@
-/// This file is based on the Go implementation found here:
-/// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/adler32/adler32_test.go
-/// which has the copyright notice:
 // Copyright 2009 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+///| This file is based on the Go implementation found here:
+/// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/adler32/adler32_test.go
+/// which has the copyright notice:
 typealias Slice[T] = @io.Slice[T]
 
+///|
 struct TestT {
   out : UInt
   inp : Bytes
   half_state : Bytes
 }
 
+///|
 let golden : Array[TestT] = [
   { out: 0x00000001U, inp: b"", half_state: b"adl\x01\x00\x00\x00\x01" },
   { out: 0x00620062U, inp: b"a", half_state: b"adl\x01\x00\x00\x00\x01" },
@@ -195,6 +197,7 @@ let golden : Array[TestT] = [
   },
 ]
 
+///|
 fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
   let len = b.length() * count + append.length()
   let buf = Bytes::new(len)
@@ -205,11 +208,12 @@ fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
   buf
 }
 
-/// MOD is the largest prime that is less than 65536.
+///| MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
 // checksum is a slow but simple implementation of the Adler-32 checksum.
 // It is a straight port of the sample code in RFC 1950 section 9.
+///|
 fn checksum(p : Slice[Byte]) -> UInt {
   let mut s1 = 1U
   let mut s2 = 0U
@@ -220,6 +224,7 @@ fn checksum(p : Slice[Byte]) -> UInt {
   (s2 << 16) | s1
 }
 
+///|
 type! TestError String derive(Show)
 
 test "golden" {
@@ -242,6 +247,7 @@ test "golden" {
   }
 }
 
+///|
 fn dump(b : Bytes) -> String {
   b
   .to_array()

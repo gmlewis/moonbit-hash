@@ -1,4 +1,4 @@
-/// This file is based on the Go implementation found here:
+///| This file is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/adler32/adler32.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -14,28 +14,32 @@
 ///	are done modulo 65521. s1 is initialized to 1, s2 to zero.  The
 ///	Adler-32 checksum is stored as s2*65536 + s1 in most-
 ///	significant-byte first (network) order.
-
 typealias Slice[T] = @io.Slice[T]
 
+///|
 typealias IOError = @io.IOError
 
-/// MOD is the largest prime that is less than 65536.
+///| MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
 // NMAX is the largest n such that
 // 255 * n * (n+1) / 2 + (n+1) * (MOD-1) <= 2^32-1.
 // It is mentioned in RFC 1950 (search for "5552").
+///|
 const NMAX = 5552
 
 // The size of an Adler-32 checksum in bytes.
+///|
 const SIZE = 4
 
 // digest represents the partial evaluation of a checksum.
 // The low 16 bits are s1, the high 16 bits are s2.
+///|
 struct Digest {
   mut d : UInt
 }
 
+///|
 pub fn reset(self : Digest) -> Unit {
   self.d = 1
 }
@@ -45,25 +49,32 @@ pub fn reset(self : Digest) -> Unit {
 // returned Hash32 also implements [encoding.BinaryMarshaler] and
 // [encoding.BinaryUnmarshaler] to marshal and unmarshal the internal
 // state of the hash.
+///|
 pub fn new() -> Digest {
   { d: 1 }
 }
 
 // Digest implements the @hash.Hash32 trait.
+///|
 let _interface : @hash.Hash32 = new()
 
+///|
 pub fn size(self : Digest) -> Int {
   return SIZE
 }
 
+///|
 pub fn block_size(self : Digest) -> Int {
   return 4
 }
 
+///|
 let magic = b"adl\x01"
 
+///|
 const MARSHALED_SIZE = 8 // magic.length() + 4
 
+///|
 pub fn marshal_binary(self : Digest) -> (Slice[Byte], IOError?) {
   let b = [
     b'a',
@@ -78,6 +89,7 @@ pub fn marshal_binary(self : Digest) -> (Slice[Byte], IOError?) {
   (Slice::new(b), None)
 }
 
+///|
 fn be_uint32(b : Slice[Byte]) -> UInt {
   (b[0].to_uint() << 24) |
   (b[1].to_uint() << 16) |
@@ -85,10 +97,12 @@ fn be_uint32(b : Slice[Byte]) -> UInt {
   b[3].to_uint()
 }
 
+///|
 fn has_magic(b : Slice[Byte]) -> Bool {
   b[0] == magic[0] && b[1] == magic[1] && b[2] == magic[2] && b[3] == magic[3]
 }
 
+///|
 pub fn unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
   if b.length() < magic.length() || not(has_magic(b)) {
     return Some(IOError("hash/adler32: invalid hash state identifier"))
@@ -101,6 +115,7 @@ pub fn unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
 }
 
 // Add p to the running checksum d.
+///|
 pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
   let mut s1 = self.d & 0xffff
   let mut s2 = self.d >> 16
@@ -134,10 +149,12 @@ pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
   (p.length(), None)
 }
 
+///|
 pub fn sum32(self : Digest) -> UInt {
   self.d
 }
 
+///|
 pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
   let b = Slice::new(
     [
@@ -151,6 +168,7 @@ pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
 }
 
 // checksum returns the Adler-32 checksum of data.
+///|
 pub fn checksum(data : Slice[Byte]) -> UInt {
   let d = { d: 1 }
   let _ = d.write(data)

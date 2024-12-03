@@ -1,31 +1,33 @@
-/// `@crc32.Digest` implements the 32-bit cyclic redundancy check, or CRC-32,
+///| `@crc32.Digest` implements the 32-bit cyclic redundancy check, or CRC-32,
 /// checksum. See https://en.wikipedia.org/wiki/Cyclic_redundancy_check for
 /// information.
 /// This package is based on the Go Rosetta Stone implementation found here:
 /// https://rosettacode.org/wiki/CRC-32
-
 typealias Slice[T] = @io.Slice[T]
 
+///|
 typealias IOError = @io.IOError
 
+///|
 struct Digest {
   mut crc : UInt
 }
 
-/// `new` returns a new, reset Digest, ready to sum.
+///| `new` returns a new, reset Digest, ready to sum.
 pub fn new() -> Digest {
   { crc: 0U.lnot() }
 }
 
 // Digest implements the @hash.Hash32 trait.
+///|
 let _interface : @hash.Hash32 = new()
 
-/// `sum32` returns the final crc32 as a UInt.
+///| `sum32` returns the final crc32 as a UInt.
 pub fn sum32(self : Digest) -> UInt {
   self.crc.lnot()
 }
 
-/// `write` writes `p` to the digest.
+///| `write` writes `p` to the digest.
 pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
   let n = p.length()
   for b in p {
@@ -35,6 +37,7 @@ pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
   (n, None)
 }
 
+///|
 pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
   let d = self.sum32()
   let b = Slice::new(
@@ -43,14 +46,17 @@ pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
   p.append(b)
 }
 
+///|
 pub fn reset(self : Digest) -> Unit {
   self.crc = 0U.lnot()
 }
 
+///|
 pub fn size(self : Digest) -> Int {
   4
 }
 
+///|
 pub fn block_size(self : Digest) -> Int {
   1
 }
@@ -79,6 +85,7 @@ pub fn block_size(self : Digest) -> Int {
 //   }
 // }
 
+///|
 let table : FixedArray[UInt] = [
   0, 1996959894, 3993919788, 2567524794, 124634137, 1886057615, 3915621685, 2657392035,
   249268274, 2044508324, 3772115230, 2547177864, 162941995, 2125561021, 3887607047,
