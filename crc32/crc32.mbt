@@ -52,12 +52,12 @@ pub fn reset(self : Digest) -> Unit {
 }
 
 ///|
-pub fn size(self : Digest) -> Int {
+pub fn Digest::size(_self : Digest) -> Int {
   4
 }
 
 ///|
-pub fn block_size(self : Digest) -> Int {
+pub fn Digest::block_size(_self : Digest) -> Int {
   1
 }
 

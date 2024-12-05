@@ -59,12 +59,12 @@ pub fn new() -> Digest {
 let _interface : @hash.Hash32 = new()
 
 ///|
-pub fn size(self : Digest) -> Int {
+pub fn Digest::size(_self : Digest) -> Int {
   return SIZE
 }
 
 ///|
-pub fn block_size(self : Digest) -> Int {
+pub fn Digest::block_size(_self : Digest) -> Int {
   return 4
 }
 
