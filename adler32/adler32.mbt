@@ -56,7 +56,7 @@ pub fn new() -> Digest {
 
 // Digest implements the @hash.Hash32 trait.
 ///|
-let _interface : @hash.Hash32 = new()
+let _interface : &@hash.Hash32 = new()
 
 ///|
 pub fn Digest::size(_self : Digest) -> Int {
@@ -156,14 +156,12 @@ pub fn sum32(self : Digest) -> UInt {
 
 ///|
 pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
-  let b = Slice::new(
-    [
-      (self.d >> 24).to_byte(),
-      (self.d >> 16).to_byte(),
-      (self.d >> 8).to_byte(),
-      self.d.to_byte(),
-    ],
-  )
+  let b = Slice::new([
+    (self.d >> 24).to_byte(),
+    (self.d >> 16).to_byte(),
+    (self.d >> 8).to_byte(),
+    self.d.to_byte(),
+  ])
   p.append(b)
 }
 

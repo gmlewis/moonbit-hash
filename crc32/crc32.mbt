@@ -20,7 +20,7 @@ pub fn new() -> Digest {
 
 // Digest implements the @hash.Hash32 trait.
 ///|
-let _interface : @hash.Hash32 = new()
+let _interface : &@hash.Hash32 = new()
 
 ///| `sum32` returns the final crc32 as a UInt.
 pub fn sum32(self : Digest) -> UInt {
@@ -40,9 +40,12 @@ pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
 ///|
 pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
   let d = self.sum32()
-  let b = Slice::new(
-    [(d >> 24).to_byte(), (d >> 16).to_byte(), (d >> 8).to_byte(), d.to_byte()],
-  )
+  let b = Slice::new([
+    (d >> 24).to_byte(),
+    (d >> 16).to_byte(),
+    (d >> 8).to_byte(),
+    d.to_byte(),
+  ])
   p.append(b)
 }
 

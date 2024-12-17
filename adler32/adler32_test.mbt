@@ -211,10 +211,10 @@ fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
 ///| MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
-// checksum is a slow but simple implementation of the Adler-32 checksum.
+// slow_checksum is a slow but simple implementation of the Adler-32 checksum.
 // It is a straight port of the sample code in RFC 1950 section 9.
 ///|
-fn checksum(p : Slice[Byte]) -> UInt {
+fn slow_checksum(p : Slice[Byte]) -> UInt {
   let mut s1 = 1U
   let mut s2 = 0U
   for x in p {
@@ -230,7 +230,7 @@ type! TestError String derive(Show)
 test "golden" {
   for i, g in golden {
     let p = Slice::new(g.inp.to_array())
-    let got = checksum(p)
+    let got = slow_checksum(p)
     if got != g.out {
       raise TestError(
         "test #\{i+1}: simple implementation: checksum = \{got} want \{g.out}",
