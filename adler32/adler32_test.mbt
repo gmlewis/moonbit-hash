@@ -200,12 +200,14 @@ let golden : Array[TestT] = [
 ///|
 fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
   let len = b.length() * count + append.length()
-  let buf = Bytes::new(len)
-  for i in 0..<count {
-    buf.blit(i * b.length(), b, 0, b.length())
-  }
-  buf.blit(count * b.length(), append, 0, append.length())
-  buf
+  let buf = FixedArray::makei(len, fn(i) {
+    let n = i / b.length()
+    if n < count {
+      return b[i % b.length()]
+    }
+    append[i - count * b.length()]
+  })
+  Bytes::from_fixedarray(buf)
 }
 
 ///| MOD is the largest prime that is less than 65536.
@@ -227,6 +229,7 @@ fn slow_checksum(p : Slice[Byte]) -> UInt {
 ///|
 type! TestError String derive(Show)
 
+///|
 test "golden" {
   for i, g in golden {
     let p = Slice::new(g.inp.to_array())
@@ -256,6 +259,7 @@ fn dump(b : Bytes) -> String {
   .replace_all(old=",", new="")
 }
 
+///|
 test "golden marshal" {
   for i, g in golden {
     let h = @adler32.new()

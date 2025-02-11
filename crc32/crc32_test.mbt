@@ -58,6 +58,7 @@ let golden = [
   (0x8e0bb443U, b"How can you write a big system without C++?  -Paul Glick"),
 ]
 
+///|
 test "crc32 functions correctly" {
   for pair in golden {
     let sum = @crc32.new()

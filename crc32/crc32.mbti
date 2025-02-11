@@ -1,0 +1,22 @@
+package gmlewis/hash/crc32
+
+alias @gmlewis/io as @io
+
+// Values
+fn new() -> Digest
+
+// Types and methods
+type Digest
+impl Digest {
+  block_size(Self) -> Int
+  reset(Self) -> Unit
+  size(Self) -> Int
+  sum(Self, @io.Slice[Byte]) -> @io.Slice[Byte]
+  sum32(Self) -> UInt
+  write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?)
+}
+
+// Type aliases
+
+// Traits
+
