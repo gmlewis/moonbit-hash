@@ -6,9 +6,6 @@
 typealias Slice[T] = @io.Slice[T]
 
 ///|
-typealias IOError = @io.IOError
-
-///|
 struct Digest {
   mut crc : UInt
 }
@@ -18,17 +15,16 @@ pub fn new() -> Digest {
   { crc: 0U.lnot() }
 }
 
-// Digest implements the @hash.Hash32 trait.
-///|
+///| Digest implements the @hash.Hash32 trait.
 let _interface : &@hash.Hash32 = new()
 
 ///| `sum32` returns the final crc32 as a UInt.
-pub fn sum32(self : Digest) -> UInt {
+pub impl @hash.Hash32 for Digest with sum32(self) {
   self.crc.lnot()
 }
 
 ///| `write` writes `p` to the digest.
-pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
+pub impl @hash.Hash32 for Digest with write(self, p) {
   let n = p.length()
   for b in p {
     self.crc = table[(self.crc.to_byte() & b'\xff').lxor(b).to_int()] ^
@@ -38,7 +34,7 @@ pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
 }
 
 ///|
-pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
+pub impl @hash.Hash32 for Digest with sum(self, p) {
   let d = self.sum32()
   let b = Slice::new([
     (d >> 24).to_byte(),
@@ -50,17 +46,17 @@ pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
 }
 
 ///|
-pub fn reset(self : Digest) -> Unit {
+pub impl @hash.Hash32 for Digest with reset(self) {
   self.crc = 0U.lnot()
 }
 
 ///|
-pub fn Digest::size(_self : Digest) -> Int {
+pub impl @hash.Hash32 for Digest with size(_self) {
   4
 }
 
 ///|
-pub fn Digest::block_size(_self : Digest) -> Int {
+pub impl @hash.Hash32 for Digest with block_size(_self) {
   1
 }
 

@@ -22,49 +22,45 @@ typealias IOError = @io.IOError
 ///| MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
-// NMAX is the largest n such that
-// 255 * n * (n+1) / 2 + (n+1) * (MOD-1) <= 2^32-1.
-// It is mentioned in RFC 1950 (search for "5552").
-///|
+///| NMAX is the largest n such that
+/// 255 * n * (n+1) / 2 + (n+1) * (MOD-1) <= 2^32-1.
+/// It is mentioned in RFC 1950 (search for "5552").
 const NMAX = 5552
 
-// The size of an Adler-32 checksum in bytes.
-///|
+///| The size of an Adler-32 checksum in bytes.
 const SIZE = 4
 
-// digest represents the partial evaluation of a checksum.
-// The low 16 bits are s1, the high 16 bits are s2.
-///|
+///| Digest represents the partial evaluation of a checksum.
+/// The low 16 bits are s1, the high 16 bits are s2.
 struct Digest {
   mut d : UInt
 }
 
 ///|
-pub fn reset(self : Digest) -> Unit {
+pub impl @hash.Hash32 for Digest with reset(self) {
   self.d = 1
 }
 
-// New returns a new hash.Hash32 computing the Adler-32 checksum. Its
-// Sum method will lay the value out in big-endian byte order. The
-// returned Hash32 also implements [encoding.BinaryMarshaler] and
-// [encoding.BinaryUnmarshaler] to marshal and unmarshal the internal
-// state of the hash.
 ///|
+/// New returns a new hash.Hash32 computing the Adler-32 checksum. Its
+/// Sum method will lay the value out in big-endian byte order. The
+/// returned Hash32 also implements [encoding.BinaryMarshaler] and
+/// [encoding.BinaryUnmarshaler] to marshal and unmarshal the internal
+/// state of the hash.
 pub fn new() -> Digest {
   { d: 1 }
 }
 
-// Digest implements the @hash.Hash32 trait.
-///|
+///| Digest implements the @hash.Hash32 trait.
 let _interface : &@hash.Hash32 = new()
 
 ///|
-pub fn Digest::size(_self : Digest) -> Int {
+pub impl @hash.Hash32 for Digest with size(_self) {
   return SIZE
 }
 
 ///|
-pub fn Digest::block_size(_self : Digest) -> Int {
+pub impl @hash.Hash32 for Digest with block_size(_self) {
   return 4
 }
 
@@ -114,9 +110,8 @@ pub fn unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
   None
 }
 
-// Add p to the running checksum d.
-///|
-pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
+///| Add p to the running checksum d.
+pub impl @hash.Hash32 for Digest with write(self, p) {
   let mut s1 = self.d & 0xffff
   let mut s2 = self.d >> 16
   let mut p = p
@@ -150,12 +145,12 @@ pub fn write(self : Digest, p : Slice[Byte]) -> (Int, IOError?) {
 }
 
 ///|
-pub fn sum32(self : Digest) -> UInt {
+pub impl @hash.Hash32 for Digest with sum32(self) {
   self.d
 }
 
 ///|
-pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
+pub impl @hash.Hash32 for Digest with sum(self, p) {
   let b = Slice::new([
     (self.d >> 24).to_byte(),
     (self.d >> 16).to_byte(),
@@ -165,8 +160,7 @@ pub fn sum(self : Digest, p : Slice[Byte]) -> Slice[Byte] {
   p.append(b)
 }
 
-// checksum returns the Adler-32 checksum of data.
-///|
+///| checksum returns the Adler-32 checksum of data.
 pub fn checksum(data : Slice[Byte]) -> UInt {
   let d = { d: 1 }
   let _ = d.write(data)

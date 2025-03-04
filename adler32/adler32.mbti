@@ -10,15 +10,10 @@ fn new() -> Digest
 // Types and methods
 type Digest
 impl Digest {
-  block_size(Self) -> Int
   marshal_binary(Self) -> (@io.Slice[Byte], @io.IOError?)
-  reset(Self) -> Unit
-  size(Self) -> Int
-  sum(Self, @io.Slice[Byte]) -> @io.Slice[Byte]
-  sum32(Self) -> UInt
   unmarshal_binary(Self, @io.Slice[Byte]) -> @io.IOError?
-  write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?)
 }
+impl @gmlewis/hash.Hash32 for Digest
 
 // Type aliases
 
