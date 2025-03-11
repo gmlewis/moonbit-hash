@@ -5,7 +5,11 @@ alias @gmlewis/io as @io
 // Values
 fn checksum(@io.Slice[Byte]) -> UInt
 
+fn marshal_binary(Digest) -> (@io.Slice[Byte], @io.IOError?)
+
 fn new() -> Digest
+
+fn unmarshal_binary(Digest, @io.Slice[Byte]) -> @io.IOError?
 
 // Types and methods
 type Digest
