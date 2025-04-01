@@ -1,6 +1,8 @@
-package gmlewis/hash/adler32
+package "gmlewis/hash/adler32"
 
-alias @gmlewis/io as @io
+import(
+  "gmlewis/io"
+)
 
 // Values
 fn checksum(@io.Slice[Byte]) -> UInt

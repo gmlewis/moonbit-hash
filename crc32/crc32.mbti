@@ -1,4 +1,4 @@
-package gmlewis/hash/crc32
+package "gmlewis/hash/crc32"
 
 // Values
 fn new() -> Digest
