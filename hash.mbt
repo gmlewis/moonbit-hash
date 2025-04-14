@@ -1,4 +1,5 @@
-///| This file is based on the Go implementation found here:
+///|
+/// This file is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/hash.go;l=26
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -11,7 +12,8 @@ typealias Slice[T] = @io.Slice[T]
 ///|
 typealias IOError = @io.IOError
 
-///| Hash is the common interface implemented by all hash functions.
+///|
+/// Hash is the common interface implemented by all hash functions.
 ///
 /// Hash implementations in the standard library (e.g. [hash/crc32] and
 /// [crypto/sha256]) implement the [encoding.BinaryMarshaler] and
@@ -50,7 +52,8 @@ pub(open) trait Hash {
   block_size(Self) -> Int
 }
 
-///| Hash32 is the common interface implemented by all 32-bit hash functions.
+///|
+/// Hash32 is the common interface implemented by all 32-bit hash functions.
 pub(open) trait Hash32 {
   sum32(Self) -> UInt
   // Hash
@@ -61,7 +64,8 @@ pub(open) trait Hash32 {
   block_size(Self) -> Int
 }
 
-///| Hash64 is the common interface implemented by all 64-bit hash functions.
+///|
+/// Hash64 is the common interface implemented by all 64-bit hash functions.
 pub(open) trait Hash64 {
   sum64() -> UInt64
   // Hash

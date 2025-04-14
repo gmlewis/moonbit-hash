@@ -1,4 +1,5 @@
-///| This file is based on the Go implementation found here:
+///|
+/// This file is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/adler32/adler32.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -19,18 +20,22 @@ typealias Slice[T] = @io.Slice[T]
 ///|
 typealias IOError = @io.IOError
 
-///| MOD is the largest prime that is less than 65536.
+///|
+/// MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
-///| NMAX is the largest n such that
+///|
+/// NMAX is the largest n such that
 /// 255 * n * (n+1) / 2 + (n+1) * (MOD-1) <= 2^32-1.
 /// It is mentioned in RFC 1950 (search for "5552").
 const NMAX = 5552
 
-///| The size of an Adler-32 checksum in bytes.
+///|
+/// The size of an Adler-32 checksum in bytes.
 const SIZE = 4
 
-///| Digest represents the partial evaluation of a checksum.
+///|
+/// Digest represents the partial evaluation of a checksum.
 /// The low 16 bits are s1, the high 16 bits are s2.
 struct Digest {
   mut d : UInt
@@ -51,7 +56,8 @@ pub fn new() -> Digest {
   { d: 1 }
 }
 
-///| Digest implements the @hash.Hash32 trait.
+///|
+/// Digest implements the @hash.Hash32 trait.
 let _interface : &@hash.Hash32 = new()
 
 ///|
@@ -110,7 +116,8 @@ pub fn unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
   None
 }
 
-///| Add p to the running checksum d.
+///|
+/// Add p to the running checksum d.
 pub impl @hash.Hash32 for Digest with write(self, p) {
   let mut s1 = self.d & 0xffff
   let mut s2 = self.d >> 16
@@ -160,7 +167,8 @@ pub impl @hash.Hash32 for Digest with sum(self, p) {
   p.append(b)
 }
 
-///| checksum returns the Adler-32 checksum of data.
+///|
+/// checksum returns the Adler-32 checksum of data.
 pub fn checksum(data : Slice[Byte]) -> UInt {
   let d = { d: 1 }
   let _ = d.write(data)

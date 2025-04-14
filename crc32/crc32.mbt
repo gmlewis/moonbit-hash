@@ -1,4 +1,5 @@
-///| `@crc32.Digest` implements the 32-bit cyclic redundancy check, or CRC-32,
+///|
+/// `@crc32.Digest` implements the 32-bit cyclic redundancy check, or CRC-32,
 /// checksum. See https://en.wikipedia.org/wiki/Cyclic_redundancy_check for
 /// information.
 /// This package is based on the Go Rosetta Stone implementation found here:
@@ -10,20 +11,24 @@ struct Digest {
   mut crc : UInt
 }
 
-///| `new` returns a new, reset Digest, ready to sum.
+///|
+/// `new` returns a new, reset Digest, ready to sum.
 pub fn new() -> Digest {
   { crc: 0U.lnot() }
 }
 
-///| Digest implements the @hash.Hash32 trait.
+///|
+/// Digest implements the @hash.Hash32 trait.
 let _interface : &@hash.Hash32 = new()
 
-///| `sum32` returns the final crc32 as a UInt.
+///|
+/// `sum32` returns the final crc32 as a UInt.
 pub impl @hash.Hash32 for Digest with sum32(self) {
   self.crc.lnot()
 }
 
-///| `write` writes `p` to the digest.
+///|
+/// `write` writes `p` to the digest.
 pub impl @hash.Hash32 for Digest with write(self, p) {
   let n = p.length()
   for b in p {

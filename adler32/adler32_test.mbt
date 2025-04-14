@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-///| This file is based on the Go implementation found here:
+///|
+/// This file is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/adler32/adler32_test.go
 /// which has the copyright notice:
 typealias Slice[T] = @io.Slice[T]
@@ -210,7 +211,8 @@ fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
   Bytes::from_fixedarray(buf)
 }
 
-///| MOD is the largest prime that is less than 65536.
+///|
+/// MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
 // slow_checksum is a slow but simple implementation of the Adler-32 checksum.
