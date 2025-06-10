@@ -1,6 +1,6 @@
 {
   "name": "gmlewis/hash",
-  "version": "0.19.12",
+  "version": "0.19.13",
   "deps": {
     "gmlewis/io": "0.22.4"
   },
