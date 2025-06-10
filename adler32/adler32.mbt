@@ -15,10 +15,10 @@
 ///	are done modulo 65521. s1 is initialized to 1, s2 to zero.  The
 ///	Adler-32 checksum is stored as s2*65536 + s1 in most-
 ///	significant-byte first (network) order.
-typealias Slice[T] = @io.Slice[T]
+typealias @io.Slice
 
 ///|
-typealias IOError = @io.IOError
+typealias @io.IOError
 
 ///|
 /// MOD is the largest prime that is less than 65536.

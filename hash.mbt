@@ -7,10 +7,10 @@
 /// license that can be found in the LICENSE file.
 ///
 /// Package hash provides interfaces for hash functions.
-typealias Slice[T] = @io.Slice[T]
+typealias @io.Slice
 
 ///|
-typealias IOError = @io.IOError
+typealias @io.IOError
 
 ///|
 /// Hash is the common interface implemented by all hash functions.
