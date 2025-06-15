@@ -66,6 +66,6 @@ test "crc32 functions correctly" {
     let b = Slice::new(pair.1.to_array())
     guard sum.write(b) is (_, None)
     let got = sum.sum32()
-    assert_eq!(got, pair.0)
+    assert_eq(got, pair.0)
   }
 }

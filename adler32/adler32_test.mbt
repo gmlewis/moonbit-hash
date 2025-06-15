@@ -229,7 +229,7 @@ fn slow_checksum(p : Slice[Byte]) -> UInt {
 }
 
 ///|
-type! TestError String derive(Show)
+suberror TestError String derive(Show)
 
 ///|
 test "golden" {
