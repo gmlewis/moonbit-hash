@@ -215,9 +215,9 @@ fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
 /// MOD is the largest prime that is less than 65536.
 const MOD = 65521U
 
+///|
 // slow_checksum is a slow but simple implementation of the Adler-32 checksum.
 // It is a straight port of the sample code in RFC 1950 section 9.
-///|
 fn slow_checksum(p : Slice[Byte]) -> UInt {
   let mut s1 = 1U
   let mut s2 = 0U
