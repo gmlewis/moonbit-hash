@@ -288,7 +288,7 @@ test "golden marshal" {
     guard h.write(s) is (_, None)
     guard h2.write(s) is (_, None)
     if h.sum32() != h2.sum32() {
-      raise TestError("checksum = \{h.sum32()} != marshaled \{h2.Sum32()}")
+      raise TestError("checksum = \{h.sum32()} != marshaled \{h2.sum32()}")
     }
   }
 }
