@@ -4,6 +4,8 @@ package "gmlewis/hash/crc32"
 // Values
 fn new() -> Digest
 
+// Errors
+
 // Types and methods
 type Digest
 impl @gmlewis/hash.Hash32 for Digest

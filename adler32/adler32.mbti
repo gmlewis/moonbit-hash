@@ -10,6 +10,8 @@ fn checksum(@io.Slice[Byte]) -> UInt
 
 fn new() -> Digest
 
+// Errors
+
 // Types and methods
 type Digest
 fn Digest::marshal_binary(Self) -> (@io.Slice[Byte], @io.IOError?)
