@@ -1,0 +1,24 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "gmlewis/hash/adler32"
+
+import(
+  "gmlewis/io"
+)
+
+// Values
+fn checksum(@io.Slice[Byte]) -> UInt
+
+fn new() -> Digest
+
+// Errors
+
+// Types and methods
+type Digest
+fn Digest::marshal_binary(Self) -> (@io.Slice[Byte], @io.IOError?)
+fn Digest::unmarshal_binary(Self, @io.Slice[Byte]) -> @io.IOError?
+impl @gmlewis/hash.Hash32 for Digest
+
+// Type aliases
+
+// Traits
+
