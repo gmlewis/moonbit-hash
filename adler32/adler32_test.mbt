@@ -6,7 +6,7 @@
 /// This file is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/hash/adler32/adler32_test.go
 /// which has the copyright notice:
-typealias @io.Slice
+using @io {type Slice}
 
 ///|
 struct TestT {

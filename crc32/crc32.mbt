@@ -4,7 +4,7 @@
 /// information.
 /// This package is based on the Go Rosetta Stone implementation found here:
 /// https://rosettacode.org/wiki/CRC-32
-typealias @io.Slice
+using @io {type Slice}
 
 ///|
 struct Digest {

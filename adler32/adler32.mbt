@@ -15,10 +15,10 @@
 ///	are done modulo 65521. s1 is initialized to 1, s2 to zero.  The
 ///	Adler-32 checksum is stored as s2*65536 + s1 in most-
 ///	significant-byte first (network) order.
-typealias @io.Slice
+using @io {type Slice}
 
 ///|
-typealias @io.IOError
+using @io {type IOError}
 
 ///|
 /// MOD is the largest prime that is less than 65536.
@@ -77,7 +77,7 @@ let magic = b"adl\x01"
 const MARSHALED_SIZE = 8 // magic.length() + 4
 
 ///|
-pub fn marshal_binary(self : Digest) -> (Slice[Byte], IOError?) {
+pub fn Digest::marshal_binary(self : Digest) -> (Slice[Byte], IOError?) {
   let b = [
     b'a',
     b'd',
@@ -105,7 +105,7 @@ fn has_magic(b : Slice[Byte]) -> Bool {
 }
 
 ///|
-pub fn unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
+pub fn Digest::unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
   if b.length() < magic.length() || not(has_magic(b)) {
     return Some(IOError("hash/adler32: invalid hash state identifier"))
   }

@@ -15,14 +15,8 @@ fn new() -> Digest
 
 // Types and methods
 type Digest
-fn Digest::block_size(Self) -> Int // from trait `@hash.Hash32`
 fn Digest::marshal_binary(Self) -> (@io.Slice[Byte], @io.IOError?)
-fn Digest::reset(Self) -> Unit // from trait `@hash.Hash32`
-fn Digest::size(Self) -> Int // from trait `@hash.Hash32`
-fn Digest::sum(Self, @io.Slice[Byte]) -> @io.Slice[Byte] // from trait `@hash.Hash32`
-fn Digest::sum32(Self) -> UInt // from trait `@hash.Hash32`
 fn Digest::unmarshal_binary(Self, @io.Slice[Byte]) -> @io.IOError?
-fn Digest::write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?) // from trait `@hash.Hash32`
 impl @hash.Hash32 for Digest
 
 // Type aliases
