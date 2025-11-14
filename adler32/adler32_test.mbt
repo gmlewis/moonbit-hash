@@ -208,7 +208,7 @@ fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
     }
     append[i - count * b.length()]
   })
-  Bytes::from_fixedarray(buf)
+  Bytes::from_array(buf)
 }
 
 ///|
