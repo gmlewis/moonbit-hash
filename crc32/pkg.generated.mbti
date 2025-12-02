@@ -7,13 +7,13 @@ import(
 )
 
 // Values
-fn new() -> Digest
+pub fn new() -> Digest
 
 // Errors
 
 // Types and methods
 type Digest
-impl @hash.Hash32 for Digest
+pub impl @hash.Hash32 for Digest
 
 // Type aliases
 

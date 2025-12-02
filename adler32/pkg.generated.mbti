@@ -7,17 +7,17 @@ import(
 )
 
 // Values
-fn checksum(@io.Slice[Byte]) -> UInt
+pub fn checksum(@io.Slice[Byte]) -> UInt
 
-fn new() -> Digest
+pub fn new() -> Digest
 
 // Errors
 
 // Types and methods
 type Digest
-fn Digest::marshal_binary(Self) -> (@io.Slice[Byte], @io.IOError?)
-fn Digest::unmarshal_binary(Self, @io.Slice[Byte]) -> @io.IOError?
-impl @hash.Hash32 for Digest
+pub fn Digest::marshal_binary(Self) -> (@io.Slice[Byte], @io.IOError?)
+pub fn Digest::unmarshal_binary(Self, @io.Slice[Byte]) -> @io.IOError?
+pub impl @hash.Hash32 for Digest
 
 // Type aliases
 
