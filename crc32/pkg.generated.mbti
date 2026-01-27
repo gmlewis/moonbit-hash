@@ -1,10 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "gmlewis/hash/crc32"
 
-import(
-  "gmlewis/hash"
-  "gmlewis/io"
-)
+import {
+  "gmlewis/hash",
+  "gmlewis/io",
+}
 
 // Values
 pub fn new() -> Digest
