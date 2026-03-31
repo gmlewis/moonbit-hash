@@ -106,7 +106,7 @@ fn has_magic(b : Slice[Byte]) -> Bool {
 
 ///|
 pub fn Digest::unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
-  if b.length() < magic.length() || not(has_magic(b)) {
+  if b.length() < magic.length() || !has_magic(b) {
     return Some(IOError("hash/adler32: invalid hash state identifier"))
   }
   if b.length() != MARSHALED_SIZE {
