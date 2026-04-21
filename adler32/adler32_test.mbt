@@ -231,7 +231,17 @@ fn slow_checksum(p : Slice[Byte]) -> UInt {
 ///|
 suberror TestError {
   TestError(String)
-} derive(Show)
+}
+
+///|
+pub impl Show for TestError with output(self, logger) {
+  let TestError(msg) = self
+  logger.write_string(
+    (
+      $|TestError("\{msg}")
+    ),
+  )
+}
 
 ///|
 test "golden" {
