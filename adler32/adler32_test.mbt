@@ -266,11 +266,8 @@ test "golden" {
 
 ///|
 fn dump(b : Bytes) -> String {
-  b
-  .to_array()
-  .map(fn(b) { b.to_int() })
-  .to_string()
-  .replace_all(old=",", new="")
+  let arr = b.to_array().map(fn(b) { b.to_int() })
+  to_repr(arr).to_string().replace_all(old=",", new="")
 }
 
 ///|
@@ -282,7 +279,7 @@ test "golden marshal" {
       is (_, None)
     let (state, err) = h.marshal_binary()
     if err != None {
-      raise TestError("could not marshal: \{err}")
+      raise TestError("could not marshal: \{err.unwrap().to_repr()}")
       continue
     }
     if state.to_bytes() != g.half_state {
@@ -293,7 +290,7 @@ test "golden marshal" {
     }
     let err = h2.unmarshal_binary(state)
     if err != None {
-      raise TestError("could not unmarshal: \{err}")
+      raise TestError("could not unmarshal: \{err.unwrap().to_repr()}")
       continue
     }
     let s = Slice::new(g.inp.to_array())[g.inp.length() / 2:]
