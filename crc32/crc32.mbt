@@ -23,13 +23,13 @@ let _interface : &@hash.Hash32 = new()
 
 ///|
 /// `sum32` returns the final crc32 as a UInt.
-pub impl @hash.Hash32 for Digest with sum32(self) {
+pub impl @hash.Hash32 for Digest with fn sum32(self) {
   self.crc.lnot()
 }
 
 ///|
 /// `write` writes `p` to the digest.
-pub impl @hash.Hash32 for Digest with write(self, p) {
+pub impl @hash.Hash32 for Digest with fn write(self, p) {
   let n = p.length()
   for b in p {
     self.crc = table[(self.crc.to_byte() & b'\xff').lxor(b).to_int()] ^
@@ -39,7 +39,7 @@ pub impl @hash.Hash32 for Digest with write(self, p) {
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with sum(self, p) {
+pub impl @hash.Hash32 for Digest with fn sum(self, p) {
   let d = self.sum32()
   let b = Slice::new([
     (d >> 24).to_byte(),
@@ -51,17 +51,17 @@ pub impl @hash.Hash32 for Digest with sum(self, p) {
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with reset(self) {
+pub impl @hash.Hash32 for Digest with fn reset(self) {
   self.crc = 0U.lnot()
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with size(_self) {
+pub impl @hash.Hash32 for Digest with fn size(_self) {
   4
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with block_size(_self) {
+pub impl @hash.Hash32 for Digest with fn block_size(_self) {
   1
 }
 

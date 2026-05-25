@@ -42,7 +42,7 @@ struct Digest {
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with reset(self) {
+pub impl @hash.Hash32 for Digest with fn reset(self) {
   self.d = 1
 }
 
@@ -61,12 +61,12 @@ pub fn new() -> Digest {
 let _interface : &@hash.Hash32 = new()
 
 ///|
-pub impl @hash.Hash32 for Digest with size(_self) {
+pub impl @hash.Hash32 for Digest with fn size(_self) {
   return SIZE
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with block_size(_self) {
+pub impl @hash.Hash32 for Digest with fn block_size(_self) {
   return 4
 }
 
@@ -118,7 +118,7 @@ pub fn Digest::unmarshal_binary(self : Digest, b : Slice[Byte]) -> IOError? {
 
 ///|
 /// Add p to the running checksum d.
-pub impl @hash.Hash32 for Digest with write(self, p) {
+pub impl @hash.Hash32 for Digest with fn write(self, p) {
   let mut s1 = self.d & 0xffff
   let mut s2 = self.d >> 16
   let mut p = p
@@ -152,12 +152,12 @@ pub impl @hash.Hash32 for Digest with write(self, p) {
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with sum32(self) {
+pub impl @hash.Hash32 for Digest with fn sum32(self) {
   self.d
 }
 
 ///|
-pub impl @hash.Hash32 for Digest with sum(self, p) {
+pub impl @hash.Hash32 for Digest with fn sum(self, p) {
   let b = Slice::new([
     (self.d >> 24).to_byte(),
     (self.d >> 16).to_byte(),

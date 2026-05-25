@@ -33,45 +33,45 @@ pub(open) trait Hash {
   /// Write (via the embedded io.Writer interface) adds more data to the running hash.
   /// It never returns an error.
   /// @io.Writer
-  write(Self, Slice[Byte]) -> (Int, IOError?)
+  fn write(Self, Slice[Byte]) -> (Int, IOError?)
 
   /// sum appends the current hash to b and returns the resulting slice.
   /// It does not change the underlying hash state.
-  sum(Self, Slice[Byte]) -> Slice[Byte]
+  fn sum(Self, Slice[Byte]) -> Slice[Byte]
 
   /// reset resets the Hash to its initial state.
-  reset(Self) -> Unit
+  fn reset(Self) -> Unit
 
   /// size returns the number of bytes sum will return.
-  size(Self) -> Int
+  fn size(Self) -> Int
 
   /// block_size returns the hash's underlying block size.
   /// The Write method must be able to accept any amount
   /// of data, but it may operate more efficiently if all writes
   /// are a multiple of the block size.
-  block_size(Self) -> Int
+  fn block_size(Self) -> Int
 }
 
 ///|
 /// Hash32 is the common interface implemented by all 32-bit hash functions.
 pub(open) trait Hash32 {
-  sum32(Self) -> UInt
+  fn sum32(Self) -> UInt
   // Hash
-  write(Self, Slice[Byte]) -> (Int, IOError?)
-  sum(Self, Slice[Byte]) -> Slice[Byte]
-  reset(Self) -> Unit
-  size(Self) -> Int
-  block_size(Self) -> Int
+  fn write(Self, Slice[Byte]) -> (Int, IOError?)
+  fn sum(Self, Slice[Byte]) -> Slice[Byte]
+  fn reset(Self) -> Unit
+  fn size(Self) -> Int
+  fn block_size(Self) -> Int
 }
 
 ///|
 /// Hash64 is the common interface implemented by all 64-bit hash functions.
 pub(open) trait Hash64 {
-  sum64() -> UInt64
+  fn sum64() -> UInt64
   // Hash
-  write(Self, Slice[Byte]) -> (Int, IOError?)
-  sum(Self, Slice[Byte]) -> Slice[Byte]
-  reset(Self) -> Unit
-  size(Self) -> Int
-  block_size(Self) -> Int
+  fn write(Self, Slice[Byte]) -> (Int, IOError?)
+  fn sum(Self, Slice[Byte]) -> Slice[Byte]
+  fn reset(Self) -> Unit
+  fn size(Self) -> Int
+  fn block_size(Self) -> Int
 }
