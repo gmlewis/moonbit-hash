@@ -267,7 +267,7 @@ test "golden" {
 ///|
 fn dump(b : Bytes) -> String {
   let arr = b.to_array().map(fn(b) { b.to_int() })
-  to_repr(arr).to_string().replace_all(old=",", new="")
+  Repr(arr).to_string().replace_all(old=",", new="")
 }
 
 ///|
@@ -275,7 +275,7 @@ test "golden marshal" {
   for i, g in golden {
     let h = @adler32.new()
     let h2 = @adler32.new()
-    guard h.write(Slice::new(g.inp.to_array())[:g.inp.length() / 2])
+    guard! h.write(Slice::new(g.inp.to_array())[:g.inp.length() / 2])
       is (_, None)
     let (state, err) = h.marshal_binary()
     if err != None {
@@ -294,8 +294,8 @@ test "golden marshal" {
       continue
     }
     let s = Slice::new(g.inp.to_array())[g.inp.length() / 2:]
-    guard h.write(s) is (_, None)
-    guard h2.write(s) is (_, None)
+    guard! h.write(s) is (_, None)
+    guard! h2.write(s) is (_, None)
     if h.sum32() != h2.sum32() {
       raise TestError("checksum = \{h.sum32()} != marshaled \{h2.sum32()}")
     }

@@ -39,4 +39,3 @@ pub(open) trait Hash64 {
   fn size(Self) -> Int
   fn block_size(Self) -> Int
 }
-

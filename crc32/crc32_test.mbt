@@ -64,7 +64,7 @@ test "crc32 functions correctly" {
   for pair in golden {
     let sum = @crc32.new()
     let b = Slice::new(pair.1.to_array())
-    guard sum.write(b) is (_, None)
+    guard! sum.write(b) is (_, None)
     let got = sum.sum32()
     assert_eq(got, pair.0)
   }
