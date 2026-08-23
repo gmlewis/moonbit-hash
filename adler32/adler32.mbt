@@ -171,6 +171,6 @@ pub impl @hash.Hash32 for Digest with fn sum(self, p) {
 /// checksum returns the Adler-32 checksum of data.
 pub fn checksum(data : Slice[Byte]) -> UInt {
   let d = { d: 1 }
-  let _ = d.write(data)
+  let _ = @hash.Hash32::write(d, data)
   d.d
 }

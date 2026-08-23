@@ -40,7 +40,7 @@ pub impl @hash.Hash32 for Digest with fn write(self, p) {
 
 ///|
 pub impl @hash.Hash32 for Digest with fn sum(self, p) {
-  let d = self.sum32()
+  let d = @hash.Hash32::sum32(self)
   let b = Slice::new([
     (d >> 24).to_byte(),
     (d >> 16).to_byte(),
