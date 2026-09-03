@@ -53,7 +53,7 @@ pub impl @hash.Hash32 for Digest with fn reset(self) {
 /// [encoding.BinaryUnmarshaler] to marshal and unmarshal the internal
 /// state of the hash.
 pub fn new() -> Digest {
-  { d: 1 }
+  { d: 1, }
 }
 
 ///|
@@ -170,7 +170,7 @@ pub impl @hash.Hash32 for Digest with fn sum(self, p) {
 ///|
 /// checksum returns the Adler-32 checksum of data.
 pub fn checksum(data : Slice[Byte]) -> UInt {
-  let d = { d: 1 }
+  let d = { d: 1, }
   let _ = @hash.Hash32::write(d, data)
   d.d
 }

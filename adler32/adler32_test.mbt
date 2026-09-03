@@ -17,15 +17,19 @@ struct TestT {
 
 ///|
 let golden : Array[TestT] = [
-  { out: 0x00000001U, inp: b"", half_state: b"adl\x01\x00\x00\x00\x01" },
-  { out: 0x00620062U, inp: b"a", half_state: b"adl\x01\x00\x00\x00\x01" },
-  { out: 0x012600c4U, inp: b"ab", half_state: b"adl\x01\x00b\x00b" },
-  { out: 0x024d0127U, inp: b"abc", half_state: b"adl\x01\x00b\x00b" },
-  { out: 0x03d8018bU, inp: b"abcd", half_state: b"adl\x01\x01&\x00\xc4" },
-  { out: 0x05c801f0U, inp: b"abcde", half_state: b"adl\x01\x01&\x00\xc4" },
-  { out: 0x081e0256U, inp: b"abcdef", half_state: b"adl\x01\x02M\x01'" },
-  { out: 0x0adb02bdU, inp: b"abcdefg", half_state: b"adl\x01\x02M\x01'" },
-  { out: 0x0e000325U, inp: b"abcdefgh", half_state: b"adl\x01\x03\xd8\x01\x8b" },
+  { out: 0x00000001U, inp: b"", half_state: b"adl\x01\x00\x00\x00\x01", },
+  { out: 0x00620062U, inp: b"a", half_state: b"adl\x01\x00\x00\x00\x01", },
+  { out: 0x012600c4U, inp: b"ab", half_state: b"adl\x01\x00b\x00b", },
+  { out: 0x024d0127U, inp: b"abc", half_state: b"adl\x01\x00b\x00b", },
+  { out: 0x03d8018bU, inp: b"abcd", half_state: b"adl\x01\x01&\x00\xc4", },
+  { out: 0x05c801f0U, inp: b"abcde", half_state: b"adl\x01\x01&\x00\xc4", },
+  { out: 0x081e0256U, inp: b"abcdef", half_state: b"adl\x01\x02M\x01'", },
+  { out: 0x0adb02bdU, inp: b"abcdefg", half_state: b"adl\x01\x02M\x01'", },
+  {
+    out: 0x0e000325U,
+    inp: b"abcdefgh",
+    half_state: b"adl\x01\x03\xd8\x01\x8b",
+  },
   {
     out: 0x118e038eU,
     inp: b"abcdefghi",

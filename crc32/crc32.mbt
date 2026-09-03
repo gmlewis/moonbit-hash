@@ -14,7 +14,7 @@ struct Digest {
 ///|
 /// `new` returns a new, reset Digest, ready to sum.
 pub fn new() -> Digest {
-  { crc: 0U.lnot() }
+  { crc: 0U.lnot(), }
 }
 
 ///|
