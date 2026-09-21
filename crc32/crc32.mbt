@@ -22,6 +22,16 @@ pub fn new() -> Digest {
 let _interface : &@hash.Hash32 = new()
 
 ///|
+pub extend Digest with @hash.Hash32::{
+  reset,
+  sum32,
+  sum,
+  size,
+  write,
+  block_size,
+}
+
+///|
 /// `sum32` returns the final crc32 as a UInt.
 pub impl @hash.Hash32 for Digest with fn sum32(self) {
   self.crc.lnot()

@@ -32,7 +32,7 @@ pub(open) trait Hash32 {
 }
 
 pub(open) trait Hash64 {
-  fn sum64() -> UInt64
+  fn sum64(Self) -> UInt64
   fn write(Self, @io.Slice[Byte]) -> (Int, @io.IOError?)
   fn sum(Self, @io.Slice[Byte]) -> @io.Slice[Byte]
   fn reset(Self) -> Unit

@@ -67,7 +67,7 @@ pub(open) trait Hash32 {
 ///|
 /// Hash64 is the common interface implemented by all 64-bit hash functions.
 pub(open) trait Hash64 {
-  fn sum64() -> UInt64
+  fn sum64(Self) -> UInt64
   // Hash
   fn write(Self, Slice[Byte]) -> (Int, IOError?)
   fn sum(Self, Slice[Byte]) -> Slice[Byte]

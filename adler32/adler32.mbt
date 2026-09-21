@@ -42,6 +42,16 @@ struct Digest {
 }
 
 ///|
+pub extend Digest with @hash.Hash32::{
+  reset,
+  sum32,
+  sum,
+  size,
+  write,
+  block_size,
+}
+
+///|
 pub impl @hash.Hash32 for Digest with fn reset(self) {
   self.d = 1
 }
