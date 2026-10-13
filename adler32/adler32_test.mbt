@@ -10,7 +10,7 @@ using @io {type Slice}
 
 ///|
 struct TestT {
-  out : UInt
+  out : UInt32
   inp : Bytes
   half_state : Bytes
 }
@@ -203,7 +203,7 @@ let golden : Array[TestT] = [
 ]
 
 ///|
-fn brepeat(b : Bytes, count : Int, append : Bytes) -> Bytes {
+fn brepeat(b : Bytes, count : Int32, append : Bytes) -> Bytes {
   let len = b.length() * count + append.length()
   let buf = FixedArray::makei(len, fn(i) {
     let n = i / b.length()
@@ -222,7 +222,7 @@ const MOD = 65521U
 ///|
 // slow_checksum is a slow but simple implementation of the Adler-32 checksum.
 // It is a straight port of the sample code in RFC 1950 section 9.
-fn slow_checksum(p : Slice[Byte]) -> UInt {
+fn slow_checksum(p : Slice[Byte]) -> UInt32 {
   let mut s1 = 1U
   let mut s2 = 0U
   for x in p {

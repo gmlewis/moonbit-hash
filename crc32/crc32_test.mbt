@@ -8,7 +8,7 @@
 using @io {type Slice}
 
 ///|
-let golden : ReadOnlyArray[(UInt, Bytes)] = [
+let golden : ReadOnlyArray[(UInt32, Bytes)] = [
   (0x414fa339U, b"The quick brown fox jumps over the lazy dog"),
   (0x00000000U, b""),
   (0xe8b7be43U, b"a"),

@@ -38,7 +38,7 @@ const SIZE = 4
 /// Digest represents the partial evaluation of a checksum.
 /// The low 16 bits are s1, the high 16 bits are s2.
 struct Digest {
-  mut d : UInt
+  mut d : UInt32
 }
 
 ///|
@@ -102,7 +102,7 @@ pub fn Digest::marshal_binary(self : Digest) -> (Slice[Byte], IOError?) {
 }
 
 ///|
-fn be_uint32(b : Slice[Byte]) -> UInt {
+fn be_uint32(b : Slice[Byte]) -> UInt32 {
   (b[0].to_uint() << 24) |
   (b[1].to_uint() << 16) |
   (b[2].to_uint() << 8) |
@@ -179,7 +179,7 @@ pub impl @hash.Hash32 for Digest with fn sum(self, p) {
 
 ///|
 /// checksum returns the Adler-32 checksum of data.
-pub fn checksum(data : Slice[Byte]) -> UInt {
+pub fn checksum(data : Slice[Byte]) -> UInt32 {
   let d = { d: 1, }
   let _ = @hash.Hash32::write(d, data)
   d.d
